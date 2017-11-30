@@ -24,12 +24,12 @@ $ git commit -m "此处是为上传添加的注释"
 $ git push origin master
 
 
-1.删除某一个名为“readme.txt”文件
+1.删除某一个名为"readme.txt"文件
 $ git rm readme.txt
 $ git commit -m "for test"
 $ git push origin master
 
-2.删除一个名为“raindow”文件夹及其内部的所有文件
+2.删除一个名为"raindow"文件夹及其内部的所有文件
 $git rm raindow -r -f  	删除raindow文件夹及其下所有的文件
 $git commit -m "delete raindow"  	同步删除操作到远程分支
 $git push origin master	提交到分支
