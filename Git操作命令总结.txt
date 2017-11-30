@@ -10,7 +10,7 @@ $ git commit -m "此处是为上传添加的注释"
 
 $ git push origin master
 
-
+~$Git命令.doc
 1.删除某一个名为“readme.txt”文件
 $ git rm readme.txt
 $ git commit -m "for test"
@@ -25,3 +25,9 @@ $git push origin master	提交到分支
 $ git branch -a	查看当前所有分支
 $git push origin --delete HEAD  	删除名为HEAD的分子
 	
+	
+git add 的几种参数区别
+
+git add -A 保存所有的修改 
+git add . 保存新的添加和修改，但是不包括删除 
+git add -u 保存修改和删除，但是不包括新建文件。
