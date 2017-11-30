@@ -2,7 +2,18 @@
 
 $ git pull --rebase origin master			//用于更新本地文件
 
-上传三步
+遇到Unmerged错误的时候，先把本地的备份，然后回到上一个pull成功的点
+
+$ git reset --hard FETCH_HEAD
+$ git pull
+
+git add 的几种参数区别
+
+git add -A 保存所有的修改 也可以这样写 git add --all
+git add . 保存新的添加和修改，但是不包括删除 
+git add -u 保存修改和删除，但是不包括新建文件。
+
+上传三步,使用-A,.,还是使用-u,具体要看你进行了哪些操作
 
 $ git add .
 
@@ -10,7 +21,7 @@ $ git commit -m "此处是为上传添加的注释"
 
 $ git push origin master
 
-~$Git命令.doc
+
 1.删除某一个名为“readme.txt”文件
 $ git rm readme.txt
 $ git commit -m "for test"
@@ -21,13 +32,18 @@ $git rm raindow -r -f  	删除raindow文件夹及其下所有的文件
 $git commit -m "delete raindow"  	同步删除操作到远程分支
 $git push origin master	提交到分支
 
-3.删除分支
+批量删除
+
+先手动删除你要删除的所有的文件
+然后，
+$ git add --all
+$ git commit -m "批量删除文件的注释"
+$ git push origin master
+
+
+删除分支
 $ git branch -a	查看当前所有分支
 $git push origin --delete HEAD  	删除名为HEAD的分子
 	
 	
-git add 的几种参数区别
 
-git add -A 保存所有的修改 
-git add . 保存新的添加和修改，但是不包括删除 
-git add -u 保存修改和删除，但是不包括新建文件。
