@@ -1,0 +1,123 @@
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDVZFftyiA6cVmrEy7UdhOqurWuxC/mYj48a6XjIkqKsawvELmHWfAMrGOV8pN1bPLSggI4BcU89CppNpml8/kR06AJAuwRuoD7s2l9YtJ0kdb4ZjKTGeifug9aFaHzHy1YinAsPBpCsGQZOuEXeXi5p8KDsFbJTSJzjO1vc/TqdrZokISH0xf0CZNYuOU2PYei4gYWp2Ac/N8bwzj6Lzr/6B7tM2aRRwtmiIbaJCwTQTJVBLYwxaVM2xsiFIddMi7qpsyZjoNQHWTTAhX3La1Ln9CvTvXd84NK1E8HXMOHOZBx6LMzA+cO+/NNwiAbZJn/y3KpwMEMtu3P6T2D5daD 675037440@qq.com
+
+以下是操作的命令
+JIANGGE@DESKTOP-UCNBU7L MINGW64 /
+$ git config --global user.name "WenDaoSanRi"
+
+JIANGGE@DESKTOP-UCNBU7L MINGW64 /
+$ git config --global user.email "675037440@qq.com"
+
+JIANGGE@DESKTOP-UCNBU7L MINGW64 /
+$ cd D:
+
+JIANGGE@DESKTOP-UCNBU7L MINGW64 /d
+$ cd ADpan
+
+JIANGGE@DESKTOP-UCNBU7L MINGW64 /d/ADpan
+$ cd GitSpace
+
+JIANGGE@DESKTOP-UCNBU7L MINGW64 /d/ADpan/GitSpace
+$ pwd
+/d/ADpan/GitSpace
+
+JIANGGE@DESKTOP-UCNBU7L MINGW64 /d/ADpan/GitSpace
+$ git init
+Initialized empty Git repository in D:/ADpan/GitSpace/.git/
+
+JIANGGE@DESKTOP-UCNBU7L MINGW64 /d/ADpan/GitSpace (master)
+$ git add 测试文件1.txt
+
+JIANGGE@DESKTOP-UCNBU7L MINGW64 /d/ADpan/GitSpace (master)
+$ git commit -m "add 测试文件1.txt"
+[master (root-commit) 3d91bda] add 测试文件1.txt
+ 1 file changed, 22 insertions(+)
+ create mode 100644 "\346\265\213\350\257\225\346\226\207\344\273\2661.txt"
+
+JIANGGE@DESKTOP-UCNBU7L MINGW64 /d/ADpan/GitSpace (master)
+$ cd ~/.ssh
+bash: cd: /c/Users/JIANGGE/.ssh: No such file or directory
+
+JIANGGE@DESKTOP-UCNBU7L MINGW64 /d/ADpan/GitSpace (master)
+$ ls
+测试文件1.txt  测试文件1UTF-8格式无BOM格式文件.txt.bak
+
+JIANGGE@DESKTOP-UCNBU7L MINGW64 /d/ADpan/GitSpace (master)
+$ ssh-keygen -t rsa -C "675037440@qq.com"
+Generating public/private rsa key pair.
+Enter file in which to save the key (/c/Users/JIANGGE/.ssh/id_rsa):
+Created directory '/c/Users/JIANGGE/.ssh'.
+Enter passphrase (empty for no passphrase):
+Enter same passphrase again:
+Your identification has been saved in /c/Users/JIANGGE/.ssh/id_rsa.
+Your public key has been saved in /c/Users/JIANGGE/.ssh/id_rsa.pub.
+The key fingerprint is:
+SHA256:EFgqS8D+XpKFREqaN2CaSlBWa58FcWj0nKt5xJqwfQU 675037440@qq.com
+The key's randomart image is:
++---[RSA 2048]----+
+|=++o.+*o.        |
+|*B...oo* .       |
+|*o* =.. E        |
+|o+ * o = o       |
+|. o + o S .      |
+|   + = * .       |
+|  . + * o        |
+|   .   o         |
+|                 |
++----[SHA256]-----+
+
+JIANGGE@DESKTOP-UCNBU7L MINGW64 /d/ADpan/GitSpace (master)
+$ clip < ~/.ssh/id_rsa.pub
+
+JIANGGE@DESKTOP-UCNBU7L MINGW64 /d/ADpan/GitSpace (master)
+$ ssh -T git@github.com
+The authenticity of host 'github.com (192.30.255.112)' can't be established.
+RSA key fingerprint is SHA256:nThbg6kXUpJWGl7E1IGOCspRomTxdCARLviKw6E5SY8.
+Are you sure you want to continue connecting (yes/no)? yes
+Warning: Permanently added 'github.com,192.30.255.112' (RSA) to the list of known hosts.
+Permission denied (publickey).
+
+JIANGGE@DESKTOP-UCNBU7L MINGW64 /d/ADpan/GitSpace (master)
+$ ssh -T git@github.com
+Warning: Permanently added the RSA host key for IP address '192.30.255.113' to the list of known hosts.
+Hi WenDaoSanRi! You've successfully authenticated, but GitHub does not provide shell access.
+
+JIANGGE@DESKTOP-UCNBU7L MINGW64 /d/ADpan/GitSpace (master)
+$ git remote add origin http://github.com/WenDaoSanRi/GitSpace.git
+
+JIANGGE@DESKTOP-UCNBU7L MINGW64 /d/ADpan/GitSpace (master)
+$ git push -u origin master
+Username for 'https://github.com': WenDaoSanRi
+To http://github.com/WenDaoSanRi/GitSpace.git
+ ! [rejected]        master -> master (fetch first)
+error: failed to push some refs to 'http://github.com/WenDaoSanRi/GitSpace.git'
+hint: Updates were rejected because the remote contains work that you do
+hint: not have locally. This is usually caused by another repository pushing
+hint: to the same ref. You may want to first integrate the remote changes
+hint: (e.g., 'git pull ...') before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+
+JIANGGE@DESKTOP-UCNBU7L MINGW64 /d/ADpan/GitSpace (master)
+$ git pull --rebase origin master
+warning: no common commits
+remote: Counting objects: 24, done.
+remote: Compressing objects: 100% (19/19), done.
+remote: Total 24 (delta 5), reused 17 (delta 1), pack-reused 0
+Unpacking objects: 100% (24/24), done.
+From http://github.com/WenDaoSanRi/GitSpace
+ * branch            master     -> FETCH_HEAD
+ * [new branch]      master     -> origin/master
+First, rewinding head to replay your work on top of it...
+Applying: add 测试文件1.txt
+
+JIANGGE@DESKTOP-UCNBU7L MINGW64 /d/ADpan/GitSpace (master)
+$ git push -u origin master
+Username for 'https://github.com': WenDaoSanRi
+Counting objects: 3, done.
+Delta compression using up to 8 threads.
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 515 bytes | 0 bytes/s, done.
+Total 3 (delta 0), reused 0 (delta 0)
+To http://github.com/WenDaoSanRi/GitSpace.git
+   de2576e..ef1c469  master -> master
+Branch master set up to track remote branch master from origin.
+
