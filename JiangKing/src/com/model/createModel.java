@@ -39,10 +39,9 @@ public class createModel extends Thread {
     @Override
     public void run() {
         File file = new File(filePath);
-        File readFile = new File("C:/ADpan/WorkSpaceHome/IDEAspace/JiangKing/FileFolder/createModel/modelFile1");/*要读取的文件地址*/
-
-        File file2 = new File("C:/ADpan/WorkSpaceHome/IDEAspace/JiangKing/FileFolder/createModel/daoMapperFile");
-        File readColumnFile = new File("C:/ADpan/WorkSpaceHome/IDEAspace/JiangKing/FileFolder/createModel/longColumn");
+        File readFile = new File("D:/ADpan/WorkSpaceHome/IDEAspace/JiangKing/FileFolder/createModel/modelFile1");/*要读取的文件地址*/
+        File file2 = new File("D:/ADpan/WorkSpaceHome/IDEAspace/JiangKing/FileFolder/createModel/daoMapperFile");
+        File readColumnFile = new File("D:/ADpan/WorkSpaceHome/IDEAspace/JiangKing/FileFolder/createModel/longColumn");
 
         String line = null;
         try {
@@ -63,7 +62,8 @@ public class createModel extends Thread {
                         //<result column="MIN_INV_AMT" property="minIncAmt"/>
                         String daoMapperResult="<result column=\""+arr[2].toUpperCase()+"\" property=\"";
 
-                        writer.println("@Column(name = " + "\"" + arr[2] + "\")");
+                        String _strColumn="@Column(name = " + "\"" + arr[2].toUpperCase() + "\")";
+
                         String[] arrColumn = arr[2].trim().split("_");
                         int _length = arrColumn.length;
                         //0个_
@@ -103,7 +103,19 @@ public class createModel extends Thread {
                         if(longCount>0){
                             strtype="private BigDecimal";
                         }
-                        writer.println(strtype + " " + strComn+";");
+
+                        String strColumn1= strComn+";";
+                        int strColumnLength=strColumn1.length();
+                        String lastThreeChar=strColumn1.substring(strColumnLength-3,strColumnLength);
+                        System.out.println(lastThreeChar);
+                        if(lastThreeChar.toUpperCase().equals("YN;")){
+                            _strColumn="@Enumerated(EnumType.STRING)"+"\n"+_strColumn;
+                            strtype="private YesNo";
+                        }
+                        String strColumn=strtype + " " + strComn+";";
+
+                        writer.println(_strColumn);
+                        writer.println(strColumn);
                         daoMapperResult=daoMapperResult+strComn+"\"/>";
                         writer2.println(daoMapperResult);
                 }
@@ -122,6 +134,6 @@ public class createModel extends Thread {
 
     public static void main(String[] args) {
         // 启动线程调用线程类的start()方法
-        new createModel("C:/ADpan/WorkSpaceHome/IDEAspace/JiangKing/FileFolder/createModel/modelFile2").start();/*要写入的文件地址*/
+        new createModel("D:/ADpan/WorkSpaceHome/IDEAspace/JiangKing/FileFolder/createModel/modelFile2").start();/*要写入的文件地址*/
     }
 }
