@@ -1,0 +1,177 @@
+<%@ page contentType="text/html; charset=UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<%@ include file="/WEB-INF/page/include/taglib.jsp"%>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title><bi:i18n code="text.pro.reserve.title"/><%--私募基金预约管理--%></title>
+    <link rel="stylesheet" type="text/css" href="${ctxStatic }/css/bi/reset.css" />
+    <link rel="stylesheet" type="text/css" href="${ctxStatic }/css/bi/min.css" />
+    <link rel="stylesheet" type="text/css" href="${ctxStatic }/css/bi/admin.css" />
+    <link rel="stylesheet" type="text/css" href="${ctxStatic }/lib/sys-iconfont/1.0.7/iconfont.css" />
+    <link rel="stylesheet" type="text/css" href="${ctxStatic }/lib/icheck/icheck.css" />
+    <link rel="stylesheet" type="text/css" href="${ctxStatic }/skin/default/skin.css" id="skin"/>
+    <link rel="stylesheet" type="text/css" href="${ctxStatic }/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="${ctxStatic }/lib/menu-iconfont/iconfont.css" />
+    <script type="text/javascript" src="${ctxStatic }/js/lang/bi.message-zh_CN.js"></script>
+    <script type="text/javascript" src="${ctxStatic }/lib/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript" src="${ctxStatic }/lib/icheck/jquery.icheck.min.js"></script>
+    <script type="text/javascript" src="${ctxStatic }/lib/zTree/v3/js/jquery.ztree.all-3.5.min.js"></script>
+    <script type="text/javascript" src="${ctxStatic }/lib/My97DatePicker/WdatePicker.js"></script>
+    <script type="text/javascript" src="${ctxStatic }/lib/Validform/5.3.2/Validform.js"></script>
+    <script type="text/javascript" src="${ctxStatic }/lib/laypage/1.2/laypage.js"></script>
+    <script type="text/javascript" src="${ctxStatic }/lib/layer/2.1/layer.js"></script>
+    <script type="text/javascript" src="${ctxStatic }/js/bi.js"></script>
+    <script type="text/javascript" src="${ctxStatic }/js/number.utils.js"></script>
+    <script type="text/javascript" src="${ctxStatic }/lib/handlebars/4.0.2/handlebars.min.js"></script>
+    <script type="text/javascript" src="${ctxStatic }/lib/handlebars/4.0.2/handlebars.ext.js"></script>
+    <script type="text/javascript" src="${ctxStatic }/js/bi.admin.js"></script>
+    <script type="text/javascript" src="${ctxStatic }/js/fpnComponent.js"></script>
+    <link rel="stylesheet" type="text/css" href="${ctxStatic }/lib/multiselect/multiple-select.css" />
+
+
+</head>
+
+<body>
+<div class="table-title">
+    <span class="TC"><bi:i18n code="text.pro.reserve.proReserveManage"/><%--产品预约管理--%></span>
+</div>
+<form id="reserveForm" action="${ctx}/pro/reserve/add" method="post">
+    <input type="hidden" value="${proReserve.proCode}" name="proCode"/>
+    <input type="hidden" value="${status}" name="status"/>
+<table width="100%" border="0" align="center" class="table table-border table-hover table-search-bg table-striped width-98">
+    <tbody>
+    <tr>
+        <th width="20%"><bi:i18n code="text.pro.reserve.ifProReserveManage"/><%--是否启用预约管理--%> <span class="c-red">*</span></th>
+        <td width="30%">
+            <input type="radio" name="reserveYn" id="reserveY"  value="Y" > <span><bi:i18n code="text.pro.reserve.yes"/><%--是--%> </span>
+
+            <input type="radio" name="reserveYn" id="reserveN"  value="N" > <span><bi:i18n code="text.pro.reserve.no"/><%--否--%></span></td>
+
+
+        <th style="width: 20%;display:none;" id="touziren1" ><bi:i18n code="text.pro.reserve.ifSmallInv"/><%--是否启用小额投资人控制--%></th>
+        <td style="display:none" id="touziren2" width="30%">
+            <input type="radio" id="smallInvY"   name="smallInvYn" value="Y"> <span><bi:i18n code="text.pro.reserve.yes"/><%--是--%> </span>
+            <input type="radio" id="smallInvN"   name="smallInvYn" value="N" > <span><bi:i18n code="text.pro.reserve.no" /><%--否--%></span> </td>
+
+    </tr>
+
+    <tr style="display:none" id="APPTRulesMgmt">
+        <th><bi:i18n code="text.pro.reserve.reserveOrder"/><%--预约匹配规则--%></th>
+        <td colspan="3">
+            <input type="radio" name="reserveOrder" value="T" id="reserveOrderT"> <span><bi:i18n code="text.pro.reserve.timeFirst"/><%--按照时间优先--%></span>
+            <input type="radio" name="reserveOrder" value="A" id="reserveOrderA"> <span><bi:i18n code="text.pro.reserve.moneyFirst"/><%--按照金额优先--%></span>
+        </td>
+    </tr>
+
+
+
+    <tr style="display:none" id="APPTRulesMgmtDetails">
+        <th><bi:i18n code="text.pro.reserve.smallInvController"/><%--小额投资人控制--%></th>
+        <td colspan="3">
+            <span><bi:i18n code="text.pro.reserve.smallInvDefine"/><%--小额合同金额定义--%>：</span>
+            <select style="width:120px" name="smallAmt" id="numMax">
+                <option value="100" id="small100">100W<bi:i18n code="text.pro.reserve.little"/><%--以下--%></option>
+                <option value="150" id="small150">150W<bi:i18n code="text.pro.reserve.little"/><%--以下--%></option>
+                <option value="200" id="small200">200W<bi:i18n code="text.pro.reserve.little"/><%--以下--%></option>
+            </select>
+
+
+
+    <span><bi:i18n code="text.pro.reserve.smallNum"/><%--小额合同数量--%>：</span><input id="num" type="text" name="smallNumMax" class="input-text" datatype="n1-8" style="width:120px" value="${proReserve.smallNumMax}"/>
+
+
+
+    </td>
+    </tr>
+
+
+    </tbody></table>
+
+<div class="alignRight" style="margin:0 1% 0 1%;" > <span class="TC">
+  <input type="submit" id="submit" value="<bi:i18n code="text.pro.reserve.submit"/><%--提交审核--%>" class="btn btn-primary radius"  id="save">
+  </span>
+</div>
+</form>
+</body>
+<bi:head js="true" validate="true"/>
+<script type="text/javascript">
+    var status="${status}";
+    var reserveYN="${proReserve.reserveYn}";
+    var smallInvYN="${proReserve.smallInvYn}";
+    var reserveOrder="${proReserve.reserveOrder}";
+    selected_option="${proReserve.smallAmt}";
+
+    $(document).ready(function(){
+        if(reserveYN=="Y") {
+            $("#reserveY").click();
+
+            if (smallInvYN == "Y") {
+                $("#smallInvY").click();
+                $("#numMax").val(selected_option);
+            }
+            if (smallInvYN == "N") {
+                $("#smallInvN").click();
+            }
+            if (reserveOrder == "T") {
+                $("#reserveOrderT").click();
+            }
+            if (reserveOrder == "A") {
+                $("#reserveOrderA").click();
+            }
+
+        }
+        if(reserveYN=="N"){$("#reserveN").click();
+            $("#reserveY").click();
+
+            if (smallInvYN == "Y") {
+                $("#smallInvY").click();
+                $("#numMax").val(selected_option);
+            }
+            if (smallInvYN == "N") {
+                $("#smallInvN").click();
+            }
+            if (reserveOrder == "T") {
+                $("#reserveOrderT").click();
+            }
+            if (reserveOrder == "A") {
+                $("#reserveOrderA").click();
+            }
+        }
+        if (status == "2") {
+            $("#reserveY").attr("disabled", true);
+            $("#reserveN").attr("disabled", true);
+            $("#smallInvN").attr("disabled", true);
+            $("#smallInvY").attr("disabled", true);
+            $("#reserveOrderT").attr("disabled", true);
+            $("#reserveOrderA").attr("disabled", true);
+            $("#numMax").attr("disabled", true);
+            $("#num").attr("disabled", true);
+            $("#submit").attr("disabled", true);
+
+        }
+    })
+    $("input[name='reserveYn'][value='Y']").click(function(){
+        $("#touziren1").show();$("#touziren2").show();  $("#APPTRulesMgmt").show();
+
+    })
+    $("input[name='smallInvYn'][value='Y']").click(function(){
+       $("#APPTRulesMgmtDetails").show();
+    })
+
+    $("input[name='reserveYn'][value='N']").click(function(){
+        $("#touziren1").hide();$("#touziren2").hide();
+        $("#APPTRulesMgmt").hide();$("#APPTRulesMgmtDetails").hide();
+    })
+
+    $("input[name='smallInvYn'][value='N']").click(function(){
+        $("#APPTRulesMgmt").hide();$("#APPTRulesMgmtDetails").hide();
+    })
+
+
+    $("#reserveForm").submitForm({
+        tiptype:1
+    });
+
+</script>
+</html>

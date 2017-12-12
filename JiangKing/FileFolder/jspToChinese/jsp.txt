@@ -1,0 +1,5 @@
+执行上传文件操作的函数
+        var proCode=$(obj).attr("pod");oCo
+        var fileField=$(obj).attr("id");
+        $.ajaxFileUpload({
+            //处理文件上传操作的服务器端地址(可以传参数,已亲测可用)

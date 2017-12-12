@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="YICAITEST" uuid="7db42723-f2dd-473b-9bfc-5b65578a3e8a">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" />
+      <secret-storage>master_key</secret-storage>
+      <first-sync>true</first-sync>
+      <user-name>YICAITEST</user-name>
+    </data-source>
+  </component>
+</project>
