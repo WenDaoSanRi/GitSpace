@@ -13,7 +13,7 @@ import java.io.PrintWriter;
  *                1.用persistence生成的model类，数字类型全是Long类型的，要改为Bigdecimal类型的才可以，将所有Long类型的字段全都复制到longCloumn文件中
  *                2.用Database中的generate pojos.clj生成一个实体类，然后将字段的内容复制到modelFile1文件中，运行此类
  *                由于generate pojos.clj生成的字段没有区分number类型字段
- *
+ *                3.生成完后加到你要建立的model类中，并让类继承BaseTableObject，并序列化，给主键加注解@Id,自增长的还要设置sequence
  *
  */
 public class createModel extends Thread {
@@ -56,8 +56,8 @@ public class createModel extends Thread {
                 if(index!=-1) {
                     String str = line.substring(0, index);
                     String[] arr = str.trim().split("\\s+");//先去空格再拆分
-
-                    if (!arr[2].equals("create_dt") || !arr[2].equals("modify_dt") || !arr[2].equals("create_by") || !arr[2].equals("modify_by")) {
+                    //这四个字段是继承BaseTableObject类的，不必生成
+                    if (!arr[2].equals("create_dt") && !arr[2].equals("modify_dt") && !arr[2].equals("create_by") && !arr[2].equals("modify_by")) {
 
                         //<result column="MIN_INV_AMT" property="minIncAmt"/>
                         String daoMapperResult="<result column=\""+arr[2].toUpperCase()+"\" property=\"";
